@@ -1,0 +1,18 @@
+{
+  "id": "scroll_down_indicator",
+  "type": "SharedSlice",
+  "name": "ScrollDownIndicator",
+  "description": "A scroll down indicator animation",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {},
+      "items": {}
+    }
+  ]
+} 

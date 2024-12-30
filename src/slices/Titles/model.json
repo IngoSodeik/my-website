@@ -1,0 +1,49 @@
+{
+  "id": "titles",
+  "type": "SharedSlice",
+  "name": "Titles",
+  "description": "Titles",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "job_titles": {
+          "type": "Group",
+          "config": {
+            "label": "Job Titles",
+            "repeat": true,
+            "fields": {
+              "job_title": {
+                "type": "Text",
+                "config": {
+                  "label": "Job Title",
+                  "placeholder": ""
+                }
+              },
+              "job_title_color": {
+                "type": "Color",
+                "config": {
+                  "label": "Job Title Color",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

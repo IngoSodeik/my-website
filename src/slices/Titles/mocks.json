@@ -1,0 +1,40 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"job_titles": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"job_title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "all",
+									"type": "Text"
+								}
+							],
+							[
+								"job_title_color",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "#0bf4f5",
+									"type": "Color"
+								}
+							]
+						]
+					}
+				]
+			},
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "blind",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]
