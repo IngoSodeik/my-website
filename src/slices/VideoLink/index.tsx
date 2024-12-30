@@ -1,3 +1,4 @@
+import React from 'react';
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 
@@ -9,7 +10,7 @@ export type VideoLinkProps = SliceComponentProps<Content.VideoLinkSlice>;
 /**
  * Component for "VideoLink" Slices.
  */
-const VideoLink = ({ slice }: VideoLinkProps): JSX.Element => {
+const VideoLink = ({ slice }: VideoLinkProps): React.JSX.Element => {
   return (
     <section
       data-slice-type={slice.slice_type}
