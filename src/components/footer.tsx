@@ -38,7 +38,10 @@ export default async function Footer() {
                 <li>
                   <PrismicNextLink
                     className={clsx(
-                      "group relative block overflow-hidden  rounded px-3 py-1 text-base font-bold text-slate-100 transition-colors duration-150 hover:hover:text-yellow-400",
+                      "group relative block overflow-hidden rounded px-3 py-1 text-slate-100 text-base transition-colors duration-150 hover:text-yellow-400",
+                      index === settings.data.nav_item.length - 1
+                        ? "font-normal text-sm"
+                        : "font-bold"
                     )}
                     field={link}
                   >

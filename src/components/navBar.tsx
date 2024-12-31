@@ -121,7 +121,10 @@ function DesktopMenu({
           <li>
             <PrismicNextLink
               className={clsx(
-                "group relative block overflow-hidden rounded px-3 py-1 text-base font-bold text-slate-900",
+                "group relative block overflow-hidden rounded px-3 py-1 text-base text-slate-900",
+                index === settings.data.nav_item.length - 1
+                  ? "font-normal text-sm"
+                  : "font-bold"
               )}
               field={link}
               aria-current={
@@ -130,7 +133,7 @@ function DesktopMenu({
             >
               <span
                 className={clsx(
-                  "absolute inset-0 z-0 h-full rounded bg-yellow-300 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
+                  "absolute inset-0 z-0 h-full rounded bg-yellow-300 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
                   pathname.includes(asLink(link) as string)
                     ? "translate-y-6"
                     : "translate-y-8",
