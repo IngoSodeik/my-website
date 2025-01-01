@@ -1,0 +1,56 @@
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+// List of supported locales
+const locales = ['en', 'de']
+
+// Domain to locale mapping with fixed locales
+const fixedDomainLocales: Record<string, string> = {
+  'ingosodeik.com': 'en',
+  'ingosodeik.de': 'de',
+}
+
+// List of valid paths that need localization
+const validPaths = ['', 'movies', 'projects', 'about', 'impressum']
+
+export const config = {
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ],
+}
+
+export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname
+  const hostname = request.nextUrl.hostname
+
+  // Get the first segment of the path (after the leading slash)
+  const segments = pathname.split('/').filter(Boolean)
+  const firstSegment = segments[0]
+
+  // If the path already has a valid locale, let it through
+  if (locales.includes(firstSegment)) {
+    return NextResponse.next()
+  }
+
+  // Determine the default locale
+  let defaultLocale = 'en'
+  
+  // If it's a domain with a fixed locale, use that
+  if (hostname in fixedDomainLocales) {
+    defaultLocale = fixedDomainLocales[hostname]
+  } else {
+    // For sodeik.com and localhost, check browser language
+    const acceptLanguage = request.headers.get('accept-language')
+    if (acceptLanguage?.includes('de')) {
+      defaultLocale = 'de'
+    }
+  }
+
+  // If it's the root path or a valid path without locale, redirect to localized version
+  if (pathname === '/' || validPaths.includes(firstSegment)) {
+    request.nextUrl.pathname = `/${defaultLocale}${pathname}`
+    return NextResponse.redirect(request.nextUrl)
+  }
+
+  return NextResponse.next()
+}

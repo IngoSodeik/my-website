@@ -1,22 +1,29 @@
-import { Metadata } from "next";
-import { SliceZone } from "@prismicio/react";
+import { redirect } from 'next/navigation'
+import { headers } from 'next/headers'
 
-import { createClient } from "@/prismicio";
-import { components } from "@/slices";
-
-export default async function Page() {
-  const client = createClient();
-  const page = await client.getSingle("homepage");
-
-  return <SliceZone slices={page.data.slices} components={components} />;
+// Domain to locale mapping with fixed locales
+const fixedDomainLocales: Record<string, string> = {
+  'ingosodeik.com': 'en',
+  'ingosodeik.de': 'de',
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const client = createClient();
-  const page = await client.getSingle("homepage");
+export default function RootPage() {
+  // Get the hostname and accept-language header
+  const headersList = headers()
+  const host = headersList.get('host') || ''
+  const hostname = host.split(':')[0] // Remove port number if present
+  const acceptLanguage = headersList.get('accept-language') || ''
 
-  return {
-    title: page.data.meta_title,
-    description: page.data.meta_description,
-  };
-}
+  // If it's a domain with a fixed locale, use that
+  if (hostname in fixedDomainLocales) {
+    redirect(`/${fixedDomainLocales[hostname]}`)
+  }
+
+  // For sodeik.com and localhost, check browser language
+  let defaultLocale = 'en'
+  if (acceptLanguage.includes('de')) {
+    defaultLocale = 'de'
+  }
+
+  redirect(`/${defaultLocale}`)
+} 

@@ -1,14 +1,21 @@
 import React from 'react';
-import { createClient } from '@/prismicio';
+import { Content } from "@prismicio/client";
 import NavBar from '@/components/navBar';
 
-export default async function Header() {
-    const client = createClient();
-    const settings = await client.getSingle('settings');
+interface SettingsWithTranslations extends Content.SettingsDocument {
+  translations: {
+    [key: string]: Content.SettingsDocument;
+  };
+}
 
-    return (
-        <header className="top-0 z-50 mx-auto max-w-7xl md:sticky md:top-4">
-            <NavBar settings={settings} />
-        </header>
-    );
+export default function Header({
+  settings
+}: {
+  settings: SettingsWithTranslations;
+}) {
+  return (
+    <header className="top-0 z-50 mx-auto max-w-7xl md:sticky md:top-4">
+      <NavBar settings={settings} />
+    </header>
+  );
 }

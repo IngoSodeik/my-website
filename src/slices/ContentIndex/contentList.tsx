@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { MdArrowOutward } from 'react-icons/md';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { useParams } from 'next/navigation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,7 +31,11 @@ export default function contentList({
   const [currentItem, setCurrentItem] = useState<null | number>(null);
   const [hovering, setHovering] = useState(false);
   
-  const urlPrefix = contentType === 'Movies' ? '/movies' : '/projects';
+  // Get the current locale from the URL
+  const params = useParams();
+  const locale = params?.locale as string || "en";
+  
+  const urlPrefix = `/${locale}${contentType === 'Movies' ? '/movies' : '/projects'}`;
 
   // Sort items by date (newest first)
   const sortedItems = [...items].sort((a, b) => {
@@ -159,7 +164,7 @@ export default function contentList({
           >
             {isFilled.keyText(item.data.title) && (
               <Link 
-                href={urlPrefix + "/" + item.uid} 
+                href={`${urlPrefix}/${item.uid}`}
                 className="flex flex-col justify-between border-t border-t-slate-100 py-10 text-slate-200 md:flex-row"
                 aria-label={item.data.title}
               >
