@@ -10,9 +10,9 @@ const fixedDomainLocales: Record<string, string> = {
 export function middleware(request: NextRequest) {
   // Get the hostname without port number
   const hostname = request.headers.get('host') || ''
-  console.log('🚀 Hostname:', hostname)
+  // console.log('🚀 Hostname:', hostname)
   const domainWithoutPort = hostname.split(':')[0]
-  console.log('🚀 Domain without port:', domainWithoutPort)
+  // console.log('🚀 Domain without port:', domainWithoutPort)
 
   // If it's a domain with a fixed locale, use that
   if (domainWithoutPort in fixedDomainLocales) {
