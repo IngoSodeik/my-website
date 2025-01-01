@@ -58,8 +58,10 @@ export default async function RootLayout({
     <html lang={locale} className={clsx("bg-black text-slate-100", urbanist.className)}>
       <body className="relative min-h-screen">
         <Header settings={settings} />
-        {children}
-        {modal}
+        <div className="min-h-[calc(75vh)] flex flex-col justify-center">
+          {children}
+          {modal}
+        </div>
         <Footer settings={settings} />
         <div className="absolute inset-0 -z-50 max-h-full background-gradient"></div>
         <div className="absolute pointer-events-none inset-0 -z-40 h-full bg-[url('/noisetexture.jpg')] opacity-20 mix-blend-soft-light"></div>

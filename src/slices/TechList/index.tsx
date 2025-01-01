@@ -57,11 +57,11 @@ const TechList = ({ slice }: TechListProps): React.JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="overflow-hidden"
+      className="overflow-hidden lg:mt-20 md:mt-8 mt-0"
       ref={component}
     >
       <Bounded as="div">
-        <Heading as="h2" size="xl" className="mb-8 mt-167">
+        <Heading as="h2" size="xl" className="mb-8">
           {slice.primary.heading}
         </Heading>
       </Bounded>

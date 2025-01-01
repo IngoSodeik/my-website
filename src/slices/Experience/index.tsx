@@ -18,7 +18,7 @@ const Experience = ({ slice }: ExperienceProps): React.JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <Heading as="h2" size="lg" className="mt-8">
+      <Heading as="h2" size="lg" className="mt-8 lg:mt-24">
         {slice.primary.heading}
       </Heading>
       {slice.primary.item.map((item, index) => (

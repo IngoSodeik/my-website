@@ -57,7 +57,7 @@ const Titles = ({ slice }: TitlesProps): React.JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="overflow-hidden"
+      className="overflow-hidden lg:mt-20 md:mt-12 mt-0"
       ref={component}
     >
       <Bounded as="div">
