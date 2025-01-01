@@ -8,20 +8,17 @@ const fixedDomainLocales: Record<string, string> = {
 }
 
 export function middleware(request: NextRequest) {
-  console.log('middleware test');
-  // Only run on homepage requests
-  if (request.nextUrl.pathname !== '/') {
-    return NextResponse.next()
-  }
-
   // Get the hostname without port number
   const hostname = request.headers.get('host') || ''
+  console.log('🚀 Hostname:', hostname)
   const domainWithoutPort = hostname.split(':')[0]
+  console.log('🚀 Domain without port:', domainWithoutPort)
 
   // If it's a domain with a fixed locale, use that
   if (domainWithoutPort in fixedDomainLocales) {
+    const locale = fixedDomainLocales[domainWithoutPort]
     return NextResponse.redirect(
-      new URL(`/${fixedDomainLocales[domainWithoutPort]}`, request.url),
+      new URL(`/${locale}${request.nextUrl.pathname}`, request.url),
       { status: 307 }
     )
   }
@@ -31,7 +28,7 @@ export function middleware(request: NextRequest) {
   const defaultLocale = acceptLanguage?.toLowerCase().includes('de') ? 'de' : 'en'
   
   return NextResponse.redirect(
-    new URL(`/${defaultLocale}`, request.url),
+    new URL(`/${defaultLocale}${request.nextUrl.pathname}`, request.url),
     { status: 307 }
   )
 }
@@ -45,8 +42,9 @@ export const config = {
      * - /_next (Next.js internals)
      * - /(en|de) (Already localized paths)
      * - /static (static files)
-     * - favicon.ico, robots.txt (static files)
+     * - /public (public assets)
+     * - favicon.ico, robots.txt, etc (static files)
      */
-    '/((?!api|_next|static|[\\w-]+\\.\\w+|en|de).*)'
+    '/((?!api|_next|static|public|sounds|[\\w-]+\\.\\w+|en|de).*)'
   ]
 } 

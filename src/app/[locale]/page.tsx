@@ -16,7 +16,7 @@ const localeMap: Record<string, string> = {
 
 export default async function Page({ params }: { params: Params }) {
   if (!params?.locale || !localeMap[params.locale]) {
-    console.error('Homepage: Invalid locale:', params);
+    // console.error('Homepage: Invalid locale:', params);
     return notFound();
   }
 
