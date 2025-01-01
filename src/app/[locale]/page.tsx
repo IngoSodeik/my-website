@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { Metadata } from "next";
 import { SliceZone } from "@prismicio/react";
 import { createClient } from "@/prismicio";
@@ -60,8 +62,4 @@ export async function generateMetadata({
     console.error('Metadata: Error:', { error, locale: params.locale });
     return { title: 'Homepage' };
   }
-}
-
-export async function generateStaticParams() {
-  return Object.keys(localeMap).map((locale) => ({ locale }));
 } 

@@ -9,13 +9,24 @@ import { isFilled } from "@prismicio/client";
 import Bounded from "@/components/bounded";
 import Heading from "@/components/heading";
 
-type Params = { uid: string };
+type Params = { locale: string; uid: string };
 
-export default async function Page({ params }: { params: Promise<Params> }) {
-  const { uid } = await params;
+const localeMap: Record<string, string> = {
+  'en': 'en-us',
+  'de': 'de-de',
+};
+
+export default async function Page({ params }: { params: Params }) {
+  const { uid, locale } = params;
+  if (!locale || !localeMap[locale]) {
+    return notFound();
+  }
+
   const client = createClient();
+  const prismicLocale = localeMap[locale];
+  
   const page = await client
-    .getByUID("project_post", uid)
+    .getByUID("project_post", uid, { lang: prismicLocale })
     .catch(() => notFound());
   
   function formatDate(date: DateField) {
@@ -26,13 +37,12 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         year: "numeric",
       };
 
-      return new Intl.DateTimeFormat("en-US", dateOptions).format(new Date(date));
+      return new Intl.DateTimeFormat(locale === 'de' ? 'de-DE' : 'en-US', dateOptions).format(new Date(date));
     }
     return "";
   }
 
   const formattedDate = formatDate(page.data.date);
-  
 
   return (
     <Bounded as="article">
@@ -53,15 +63,22 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     </Bounded>
   );
 }
+
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<Params>;
+  params: Params
 }): Promise<Metadata> {
-  const { uid } = await params;
+  const { uid, locale } = params;
+  if (!locale || !localeMap[locale]) {
+    return { title: 'Not Found' };
+  }
+
   const client = createClient();
+  const prismicLocale = localeMap[locale];
+  
   const page = await client
-    .getByUID("project_post", uid)
+    .getByUID("project_post", uid, { lang: prismicLocale })
     .catch(() => notFound());
 
   return {
@@ -72,9 +89,32 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   const client = createClient();
-  const pages = await client.getAllByType("project_post");
-
-  return pages.map((page) => {
-    return { uid: page.uid };
-  });
+  const locales = Object.keys(localeMap);
+  
+  // Get all projects for all locales, but handle missing translations
+  const allParams = await Promise.all(
+    locales.map(async (locale) => {
+      try {
+        const prismicLocale = localeMap[locale];
+        const pages = await client.getAllByType("project_post", { 
+          lang: prismicLocale
+        });
+        
+        // Only generate paths for articles that exist
+        if (pages && pages.length > 0) {
+          return pages.map((page) => ({
+            locale,
+            uid: page.uid,
+          }));
+        }
+        return []; // Return empty array if no articles exist for this locale
+      } catch (error) {
+        console.log(`No project posts found for locale: ${locale}`);
+        return []; // Return empty array on error
+      }
+    })
+  );
+  
+  // Flatten and filter out any empty arrays
+  return allParams.flat();
 }
