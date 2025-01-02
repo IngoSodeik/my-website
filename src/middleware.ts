@@ -43,8 +43,9 @@ export const config = {
      * - /(en|de) (Already localized paths)
      * - /static (static files)
      * - /public (public assets)
+     * - /slice-simulator (Prismic slice simulator)
      * - favicon.ico, robots.txt, etc (static files)
      */
-    '/((?!api|_next|static|public|sounds|[\\w-]+\\.\\w+|en|de).*)'
+    '/((?!api|_next|static|public|sounds|slice-simulator|[\\w-]+\\.\\w+|en|de).*)'
   ]
 } 
