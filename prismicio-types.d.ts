@@ -89,6 +89,7 @@ export interface MoviePostDocumentDataTagnameItem {
 }
 
 type MoviePostDocumentDataSlicesSlice =
+  | AiDisclosureSlice
   | ImageBlockSlice
   | VideoLinkSlice
   | ScrollDownIndicatorSlice
@@ -283,6 +284,7 @@ export interface ProjectPostDocumentDataTagnameItem {
 }
 
 type ProjectPostDocumentDataSlicesSlice =
+  | AiDisclosureSlice
   | ImageBlockSlice
   | ScrollDownIndicatorSlice
   | TextBlockSlice;
@@ -554,6 +556,36 @@ export type AllDocumentTypes =
   | PageDocument
   | ProjectPostDocument
   | SettingsDocument;
+
+/**
+ * Default variation for AiDisclosure Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AiDisclosureSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *AiDisclosure*
+ */
+type AiDisclosureSliceVariation = AiDisclosureSliceDefault;
+
+/**
+ * AiDisclosure Shared Slice
+ *
+ * - **API ID**: `ai_disclosure`
+ * - **Description**: A message disclosing AI usage on the website
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AiDisclosureSlice = prismic.SharedSlice<
+  "ai_disclosure",
+  AiDisclosureSliceVariation
+>;
 
 /**
  * Primary content in *Biography → Default → Primary*
@@ -1252,6 +1284,9 @@ declare module "@prismicio/client" {
       SettingsDocumentData,
       SettingsDocumentDataNavItemItem,
       AllDocumentTypes,
+      AiDisclosureSlice,
+      AiDisclosureSliceVariation,
+      AiDisclosureSliceDefault,
       BiographySlice,
       BiographySliceDefaultPrimary,
       BiographySliceVariation,

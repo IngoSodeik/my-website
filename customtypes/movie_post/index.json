@@ -55,6 +55,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "ai_disclosure": {
+              "type": "SharedSlice"
+            },
             "image_block": {
               "type": "SharedSlice"
             },

@@ -1,0 +1,18 @@
+{
+  "id": "ai_disclosure",
+  "type": "SharedSlice",
+  "name": "AiDisclosure",
+  "description": "A message disclosing AI usage on the website",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {},
+      "items": {}
+    }
+  ]
+}

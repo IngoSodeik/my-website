@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
-import clsx from "clsx";
 import { PrismicPreview } from "@prismicio/next";
 import { createClient, repositoryName } from "@/prismicio";
-import { headers } from "next/headers";
+import ClientLayout from "./client-layout";
+import clsx from "clsx";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -34,11 +32,6 @@ export default async function RootLayout({
 }) {
   const client = createClient();
   
-  // Get the current locale from the URL
-  const headersList = headers();
-  const pathname = headersList.get("x-pathname") || "";
-  const locale = pathname.split('/')[1] || "en";
-  
   // Fetch both language versions of the settings
   const [enSettings, deSettings] = await Promise.all([
     client.getSingle("settings", { lang: "en-us" }),
@@ -55,16 +48,12 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang={locale} className={clsx("bg-black text-slate-100", urbanist.className)}>
+    <html className={clsx(urbanist.className, "bg-black text-slate-100")}>
       <body className="relative min-h-screen">
-        <Header settings={settings} />
-        <div className="min-h-[calc(75vh)] flex flex-col justify-center">
+        <ClientLayout settings={settings} params={params}>
           {children}
           {modal}
-        </div>
-        <Footer settings={settings} />
-        <div className="absolute inset-0 -z-50 max-h-full background-gradient"></div>
-        <div className="absolute pointer-events-none inset-0 -z-40 h-full bg-[url('/noisetexture.jpg')] opacity-20 mix-blend-soft-light"></div>
+        </ClientLayout>
         <PrismicPreview repositoryName={repositoryName} />
       </body>
     </html>
