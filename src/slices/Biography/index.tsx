@@ -3,7 +3,6 @@ import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/bounded";
 import Heading from "@/components/heading";
 import Button from "@/components/button";
-import { PrismicNextImage } from "@prismicio/next";
 import Avatar from "./Avatar";
 /**
  * Props for `Biography`.
@@ -26,10 +25,19 @@ const Biography = ({ slice }: BiographyProps): React.JSX.Element => {
         <div className="prose prose-xl- prose-slate prose-invert col-start-1">
           <PrismicRichText field={slice.primary.description} />
         </div>
-        <Button 
-          linkField={slice.primary.button_link} 
-          label={slice.primary.button_text} 
-        />
+
+        {slice.primary.buttongroup && slice.primary.buttongroup.length > 0 && (
+          <div className="flex flex-wrap gap-4 col-start-1">
+            {slice.primary.buttongroup.map((item) => (
+              <Button 
+                key={item.buttontext}
+                linkField={item.buttonlink} 
+                label={item.buttontext} 
+              />
+            ))}
+          </div>
+        )}
+
         <Avatar 
           image={slice.primary.avatar} 
           className="row-start-1 max-w-sm md:col-start-2 md:row-end-3"

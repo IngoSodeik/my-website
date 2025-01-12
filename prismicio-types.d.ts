@@ -589,6 +589,31 @@ export type AiDisclosureSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *Biography → Default → Primary → ButtonGroup*
+ */
+export interface BiographySliceDefaultPrimaryButtongroupItem {
+  /**
+   * buttontext field in *Biography → Default → Primary → ButtonGroup*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: biography.default.primary.buttongroup[].buttontext
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  buttontext: prismic.KeyTextField;
+
+  /**
+   * ButtonLink field in *Biography → Default → Primary → ButtonGroup*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: biography.default.primary.buttongroup[].buttonlink
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  buttonlink: prismic.LinkField;
+}
+
+/**
  * Primary content in *Biography → Default → Primary*
  */
 export interface BiographySliceDefaultPrimary {
@@ -613,24 +638,16 @@ export interface BiographySliceDefaultPrimary {
   description: prismic.RichTextField;
 
   /**
-   * Button Text field in *Biography → Default → Primary*
+   * ButtonGroup field in *Biography → Default → Primary*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: biography.default.primary.button_text
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **API ID Path**: biography.default.primary.buttongroup[]
+   * - **Documentation**: https://prismic.io/docs/field#group
    */
-  button_text: prismic.KeyTextField;
-
-  /**
-   * Button Link field in *Biography → Default → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: biography.default.primary.button_link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  button_link: prismic.LinkField;
+  buttongroup: prismic.GroupField<
+    Simplify<BiographySliceDefaultPrimaryButtongroupItem>
+  >;
 
   /**
    * Avatar field in *Biography → Default → Primary*
@@ -977,16 +994,7 @@ export interface InterLinkSliceDefaultItem {
    * - **API ID Path**: inter_link.items[].link_type
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  link_type: prismic.SelectField<
-    | "GitHub"
-    | "LinkedIn"
-    | "Twitter"
-    | "Homepage"
-    | "Portfolio"
-    | "Blog"
-    | "Email"
-    | "Other"
-  >;
+  link_type: prismic.SelectField<"GitHub" | "Homepage">;
 
   /**
    * Link URL field in *InterLink → Items*
@@ -1363,6 +1371,7 @@ declare module "@prismicio/client" {
       AiDisclosureSliceVariation,
       AiDisclosureSliceDefault,
       BiographySlice,
+      BiographySliceDefaultPrimaryButtongroupItem,
       BiographySliceDefaultPrimary,
       BiographySliceVariation,
       BiographySliceDefault,

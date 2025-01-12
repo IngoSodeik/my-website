@@ -19,22 +19,7 @@
 					}
 				]
 			},
-			"button_text": {
-				"__TYPE__": "FieldContent",
-				"value": "interior",
-				"type": "Text"
-			},
-			"button_link": {
-				"key": "24497cf5-e6ec-4934-9913-da05b17d9a3c",
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "ExternalLink",
-					"url": "https://slicemachine.dev",
-					"text": "at"
-				}
-			},
 			"avatar": {
-				"__TYPE__": "ImageContent",
 				"origin": {
 					"id": "main",
 					"url": "https://images.unsplash.com/photo-1596195689404-24d8a8d1c6ea",
@@ -52,7 +37,39 @@
 					},
 					"background": "transparent"
 				},
+				"credits": null,
+				"alt": null,
+				"__TYPE__": "ImageContent",
 				"thumbnails": {}
+			},
+			"buttongroup": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"buttontext",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "cave",
+									"type": "Text"
+								}
+							],
+							[
+								"buttonlink",
+								{
+									"__TYPE__": "LinkContent",
+									"key": "98588613-54ed-44b3-af7a-4315cac18060",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://google.com"
+									}
+								}
+							]
+						]
+					}
+				]
 			}
 		},
 		"items": []

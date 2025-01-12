@@ -28,22 +28,31 @@
             "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
           }
         },
-        "button_text": {
-          "type": "Text",
+        "buttongroup": {
+          "type": "Group",
           "config": {
-            "label": "Button Text",
-            "placeholder": ""
-          }
-        },
-        "button_link": {
-          "type": "Link",
-          "config": {
-            "label": "Button Link",
-            "placeholder": "",
-            "select": null,
-            "allowTargetBlank": true,
-            "allowText": true,
-            "repeat": false
+            "label": "ButtonGroup",
+            "repeat": true,
+            "fields": {
+              "buttontext": {
+                "type": "Text",
+                "config": {
+                  "label": "buttontext",
+                  "placeholder": ""
+                }
+              },
+              "buttonlink": {
+                "type": "Link",
+                "config": {
+                  "label": "ButtonLink",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": false,
+                  "allowText": false,
+                  "repeat": false
+                }
+              }
+            }
           }
         },
         "avatar": {
