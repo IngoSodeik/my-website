@@ -1,0 +1,46 @@
+{
+  "id": "inter_link",
+  "type": "SharedSlice",
+  "name": "InterLink",
+  "description": "A collection of external links with customizable types",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {},
+      "items": {
+        "link_type": {
+          "type": "Select",
+          "config": {
+            "label": "Link Type",
+            "placeholder": "Select link type",
+            "options": [
+              "GitHub",
+              "Homepage"
+            ]
+          }
+        },
+        "link_url": {
+          "type": "Link",
+          "config": {
+            "label": "Link URL",
+            "placeholder": "Enter URL",
+            "allowTargetBlank": true,
+            "select": null
+          }
+        },
+        "link_text": {
+          "type": "Text",
+          "config": {
+            "label": "Link Text",
+            "placeholder": "Text to display (optional)"
+          }
+        }
+      }
+    }
+  ]
+}

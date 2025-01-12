@@ -284,6 +284,7 @@ export interface ProjectPostDocumentDataTagnameItem {
 }
 
 type ProjectPostDocumentDataSlicesSlice =
+  | InterLinkSlice
   | AiDisclosureSlice
   | ImageBlockSlice
   | ScrollDownIndicatorSlice
@@ -965,6 +966,80 @@ export type ImageBlockSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *InterLink → Items*
+ */
+export interface InterLinkSliceDefaultItem {
+  /**
+   * Link Type field in *InterLink → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Select link type
+   * - **API ID Path**: inter_link.items[].link_type
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  link_type: prismic.SelectField<
+    | "GitHub"
+    | "LinkedIn"
+    | "Twitter"
+    | "Homepage"
+    | "Portfolio"
+    | "Blog"
+    | "Email"
+    | "Other"
+  >;
+
+  /**
+   * Link URL field in *InterLink → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: Enter URL
+   * - **API ID Path**: inter_link.items[].link_url
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link_url: prismic.LinkField;
+
+  /**
+   * Link Text field in *InterLink → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Text to display (optional)
+   * - **API ID Path**: inter_link.items[].link_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  link_text: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for InterLink Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type InterLinkSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  Simplify<InterLinkSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *InterLink*
+ */
+type InterLinkSliceVariation = InterLinkSliceDefault;
+
+/**
+ * InterLink Shared Slice
+ *
+ * - **API ID**: `inter_link`
+ * - **Description**: A collection of external links with customizable types
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type InterLinkSlice = prismic.SharedSlice<
+  "inter_link",
+  InterLinkSliceVariation
+>;
+
+/**
  * Default variation for ScrollDownIndicator Slice
  *
  * - **API ID**: `default`
@@ -1308,6 +1383,10 @@ declare module "@prismicio/client" {
       ImageBlockSliceDefaultPrimary,
       ImageBlockSliceVariation,
       ImageBlockSliceDefault,
+      InterLinkSlice,
+      InterLinkSliceDefaultItem,
+      InterLinkSliceVariation,
+      InterLinkSliceDefault,
       ScrollDownIndicatorSlice,
       ScrollDownIndicatorSliceVariation,
       ScrollDownIndicatorSliceDefault,

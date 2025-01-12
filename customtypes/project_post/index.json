@@ -55,6 +55,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "inter_link": {
+              "type": "SharedSlice"
+            },
             "ai_disclosure": {
               "type": "SharedSlice"
             },

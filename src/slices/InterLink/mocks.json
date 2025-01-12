@@ -1,0 +1,75 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"link_type",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "GitHub",
+							"type": "Select"
+						}
+					],
+					[
+						"link_url",
+						{
+							"key": "c5c67dfa-ca3c-4665-b8b8-df4064104b27",
+							"__TYPE__": "LinkContent",
+							"value": {
+								"__TYPE__": "ExternalLink",
+								"url": "https://github.com/username",
+								"target": "_blank"
+							}
+						}
+					],
+					[
+						"link_text",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "View Source Code",
+							"type": "Text"
+						}
+					]
+				]
+			},
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"link_type",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "Homepage",
+							"type": "Select"
+						}
+					],
+					[
+						"link_url",
+						{
+							"key": "424bb7ea-8196-43f8-801b-1a66d7566ce5",
+							"__TYPE__": "LinkContent",
+							"value": {
+								"__TYPE__": "ExternalLink",
+								"url": "https://example.com",
+								"target": "_blank"
+							}
+						}
+					],
+					[
+						"link_text",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "Visit Website",
+							"type": "Text"
+						}
+					]
+				]
+			}
+		]
+	}
+]
