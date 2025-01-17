@@ -2,19 +2,22 @@ import { KeyTextField, LinkField } from "@prismicio/client"
 import { PrismicNextLink } from "@prismicio/next";
 import clsx from "clsx";
 import { MdArrowOutward } from "react-icons/md";
+import { IconType } from "react-icons";
 
 type ButtonProps = {
     linkField: LinkField;
     label: KeyTextField;
     showIcon?: boolean;
     className?: string;
+    icon?: IconType;
 }
 
 export default function Button({ 
     linkField, 
     label, 
     showIcon = true, 
-    className 
+    className,
+    icon: CustomIcon
 }: ButtonProps) {
     return (
         <PrismicNextLink 
@@ -26,7 +29,9 @@ export default function Button({
         >
             <span className="absolute inset-0 z-0 h-full translate-y-9 bg-yellow-300 translate-transform duration-300 ease-in-out group-hover:translate-y-0"></span>
             <span className="relative flex items-center justify-center gap-2">
-                {label} {showIcon && <MdArrowOutward className="inline-block" />}
+                {CustomIcon && <CustomIcon className="inline-block" />}
+                {label} 
+                {showIcon && !CustomIcon && <MdArrowOutward className="inline-block" />}
             </span>
         </PrismicNextLink>
     );
