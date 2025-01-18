@@ -10,18 +10,25 @@ import { useParams } from 'next/navigation';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const localeMap: Record<string, string> = {
+  'en': 'en-us',
+  'de': 'de-de',
+};
+
 type ContentListProps = {
   items: Content.ProjectPostDocument[] | Content.MoviePostDocument[];
   contentType: Content.ContentIndexSlice['primary']['content_type'];
   viewMoreText: Content.ContentIndexSlice['primary']['view_more_text'];
   fallbackItemImage: Content.ContentIndexSlice['primary']['fallback_item_image'];
+  prismicLocale: string;
 }
 
 export default function contentList({
     items, 
     contentType, 
     viewMoreText = "View", 
-    fallbackItemImage
+    fallbackItemImage,
+    prismicLocale
   }: ContentListProps) {
 
   const component = useRef(null);
@@ -43,7 +50,7 @@ export default function contentList({
       return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
     }
     return 0;
-  });
+  }).filter(item => item.lang === prismicLocale); // Only show items matching the current Prismic locale
 
   useEffect(() => {
     // Animate list-items in with a stagger

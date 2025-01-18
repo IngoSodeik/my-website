@@ -1,5 +1,5 @@
-'use client' 
-import { Content } from "@prismicio/client";
+'use client'
+ 
 import { SliceComponentProps } from "@prismicio/react";
 import { useParams } from "next/navigation";
 import Bounded from "@/components/bounded";

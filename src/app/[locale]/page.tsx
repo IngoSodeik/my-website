@@ -33,7 +33,11 @@ export default async function Page({ params }: { params: Params }) {
       return notFound();
     }
 
-    return <SliceZone slices={page.data.slices} components={components} />;
+    return <SliceZone 
+      slices={page.data.slices} 
+      components={components} 
+      context={{ locale: params.locale }}
+    />;
   } catch (error) {
     console.error('Homepage: Error:', { error, locale: params.locale, prismicLocale });
     return notFound();

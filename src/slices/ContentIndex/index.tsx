@@ -4,6 +4,12 @@ import { Content, isFilled } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import ContentList from "./contentList";
 import { createClient } from "@/prismicio";
+import { notFound } from "next/navigation";
+
+const localeMap: Record<string, string> = {
+  'en': 'en-us',
+  'de': 'de-de',
+};
 
 /**
  * Props for `ContentIndex`.
@@ -13,10 +19,13 @@ export type ContentIndexProps = SliceComponentProps<Content.ContentIndexSlice>;
 /**
  * Component for "ContentIndex" Slices.
  */
-const ContentIndex = async ({ slice }: ContentIndexProps): Promise<React.JSX.Element> => {
+const ContentIndex = async ({ slice, context }: ContentIndexProps & { context: { locale: string } }): Promise<React.JSX.Element> => {
   const client = createClient();
-  const projectPosts = await client.getAllByType("project_post");
-  const moviePosts = await client.getAllByType("movie_post");
+  const urlLocale = context.locale;
+  const prismicLocale = localeMap[urlLocale] || 'en-us';
+  
+  const projectPosts = await client.getAllByType("project_post", { lang: prismicLocale });
+  const moviePosts = await client.getAllByType("movie_post", { lang: prismicLocale });
 
   const contentType = slice.primary.content_type || "Movies";
 
@@ -40,6 +49,7 @@ const ContentIndex = async ({ slice }: ContentIndexProps): Promise<React.JSX.Ele
         contentType={contentType} 
         viewMoreText={slice.primary.view_more_text}
         fallbackItemImage={slice.primary.fallback_item_image}
+        prismicLocale={prismicLocale}
       />
     </Bounded>
   );

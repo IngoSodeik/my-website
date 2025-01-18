@@ -16,7 +16,6 @@ const ScrollDownIndicator = ({ slice }: ScrollDownIndicatorProps) => {
   // Handle scroll event
   useEffect(() => {
     const handleScroll = () => {
-      console.log('Scroll detected');
       setHasScrolled(true);
       if (containerRef.current) {
         // First fade out
@@ -25,8 +24,6 @@ const ScrollDownIndicator = ({ slice }: ScrollDownIndicatorProps) => {
           duration: 1.5,
           ease: "power2.inOut",
           onComplete: () => {
-            console.log('Fade out complete');
-            // Only hide after fade out is complete
             if (containerRef.current) {
               gsap.set(containerRef.current, { display: 'none' });
             }
@@ -42,19 +39,14 @@ const ScrollDownIndicator = ({ slice }: ScrollDownIndicatorProps) => {
 
   // Handle initial appearance
   useEffect(() => {
-    console.log('Component mounted');
-
     // Show indicator after 3 seconds if user hasn't scrolled
     timeoutRef.current = setTimeout(() => {
-      console.log('Timer fired, hasScrolled:', hasScrolled);
       if (!hasScrolled && containerRef.current) {
-        console.log('Starting fade in');
         gsap.set(containerRef.current, { display: 'block' });
         gsap.to(containerRef.current, {
           opacity: 1,
           duration: 0.8,
-          ease: "power2.inOut",
-          onComplete: () => console.log('Fade in complete')
+          ease: "power2.inOut"
         });
       }
     }, 3000);

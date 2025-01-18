@@ -1,20 +1,10 @@
-import { Content, LinkField, SelectField, isFilled } from "@prismicio/client";
+import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import React from "react";
-import { FaGamepad, FaGithub, FaHome, FaLink } from 'react-icons/fa';
+import { FaGamepad, FaGithub, FaLink } from 'react-icons/fa';
 import Bounded from "@/components/bounded";
 import Button from "@/components/button";
-import clsx from "clsx";
 
-type LinkItem = {
-  link_type: SelectField<"GitHub" | "Homepage">;
-  link_url: LinkField;
-  link_text: SelectField<string>;
-}
-
-/**
- * Props for `InterLink`.
- */
 export type InterLinkProps = SliceComponentProps<Content.InterLinkSlice>;
 
 const iconMap = {
@@ -22,9 +12,6 @@ const iconMap = {
   Homepage: FaGamepad
 };
 
-/**
- * Component for "InterLink" Slices.
- */
 const InterLink = ({ slice }: InterLinkProps): React.JSX.Element => {
   return (
     <Bounded

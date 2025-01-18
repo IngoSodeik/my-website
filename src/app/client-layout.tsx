@@ -18,6 +18,23 @@ export default function ClientLayout({
   const locale = segments[0] === "de" ? "de" : "en";
   const htmlLang = locale === "de" ? "de" : "en";
   
+  // Determine gradient based on route
+  const getGradientClass = () => {
+    const path = segments[1]; // Get the path after locale
+    switch (path) {
+      case 'projects':
+        return 'background-gradient-green';
+      case 'movies':
+        return 'background-gradient-red';
+      case 'about':
+        return 'background-gradient-blue';
+      case 'impressum':
+        return 'background-gradient-slate';
+      default:
+        return 'background-gradient-default';
+    }
+  };
+
   // Update the html lang attribute
   if (typeof document !== 'undefined') {
     document.documentElement.lang = htmlLang;
@@ -30,7 +47,7 @@ export default function ClientLayout({
         {children}
       </div>
       <Footer settings={settings} />
-      <div className="absolute inset-0 -z-50 max-h-full background-gradient"></div>
+      <div className={clsx("absolute inset-0 -z-50 max-h-full", getGradientClass())}></div>
       <div className="absolute pointer-events-none inset-0 -z-40 h-full bg-[url('/noisetexture.jpg')] opacity-20 mix-blend-soft-light"></div>
     </>
   );

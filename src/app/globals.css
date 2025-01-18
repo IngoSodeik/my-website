@@ -2,10 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-.background-gradient {
+.background-gradient-default {
     background: radial-gradient(
         circle at top center,
         hsla(308, 80%, 60%, 0.5) 0%,
+        hsla(222, 0%, 0%, 0) 50%,
+        hsla(222, 0%, 0%, 0) 100%
+    );
+}
+
+.background-gradient-blue {
+    background: radial-gradient(
+        circle at top center,
+        hsla(210, 80%, 60%, 0.5) 0%,
+        hsla(222, 0%, 0%, 0) 50%,
+        hsla(222, 0%, 0%, 0) 100%
+    );
+}
+
+.background-gradient-green {
+    background: radial-gradient(
+        circle at top center,
+        hsla(150, 80%, 60%, 0.5) 0%,
+        hsla(222, 0%, 0%, 0) 50%,
+        hsla(222, 0%, 0%, 0) 100%
+    );
+}
+
+.background-gradient-red {
+    background: radial-gradient(
+        circle at top center,
+        hsla(4, 98%, 62%, 0.5) 0%,
+        hsla(222, 0%, 0%, 0) 50%,
+        hsla(222, 0%, 0%, 0) 100%
+    );
+}
+
+.background-gradient-slate {
+    background: radial-gradient(
+        circle at top center,
+        hsla(214, 11%, 46%, 0.4) 0%,
         hsla(222, 0%, 0%, 0) 50%,
         hsla(222, 0%, 0%, 0) 100%
     );
